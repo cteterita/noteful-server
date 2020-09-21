@@ -33,4 +33,13 @@ notesRouter
       .catch(next);
   });
 
+notesRouter
+  .route('/notes/:id')
+  .delete((req, res, next) => {
+    const { id } = req.params;
+    NotesService.deleteNote(req.app.get('db'), id)
+      .then(() => res.status(204).end())
+      .catch(next);
+  });
+
 module.exports = notesRouter;
