@@ -5,6 +5,9 @@ const cors = require('cors');
 const helmet = require('helmet');
 const { NODE_ENV } = require('./config');
 
+const foldersRouter = require('./folders/folders-router');
+const notesRouter = require('./notes/notes-router');
+
 const app = express();
 
 const morganOption = (NODE_ENV === 'production')
@@ -18,6 +21,9 @@ app.use(cors());
 app.get('/', (req, res) => {
   res.send('Hello, world!');
 });
+
+app.use(foldersRouter);
+app.use(notesRouter);
 
 app.use((error, req, res, next) => {
   let response;
